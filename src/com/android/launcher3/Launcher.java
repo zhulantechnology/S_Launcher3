@@ -1569,7 +1569,6 @@ public class Launcher extends Activity
                     return;
                 }
                 ///M.
-
                 if (!mWorkspace.isSwitchingState()) {
                     onClickWallpaperPicker(arg0);
                 }
@@ -3061,10 +3060,10 @@ public class Launcher extends Activity
     protected void onClickWallpaperPicker(View v) {
         if (LOGD) Log.d(TAG, "onClickWallpaperPicker");
         startActivityForResult(new Intent(Intent.ACTION_SET_WALLPAPER).setPackage(getPackageName()),
-                REQUEST_PICK_WALLPAPER);
+                REQUEST_PICK_WALLPAPER);   // the actual intent string ---"android.intent.action.SET_WALLPAPER"
 
         if (mLauncherCallbacks != null) {
-            mLauncherCallbacks.onClickWallpaperPicker(v);
+            mLauncherCallbacks.onClickWallpaperPicker(v);  // useless ---wangjun
         }
     }
 
