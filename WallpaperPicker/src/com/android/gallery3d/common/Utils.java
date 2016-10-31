@@ -104,7 +104,7 @@ public class Utils {
             Log.w(TAG, "fail to close", t);
         }
     }
-
+/*
     public static RectF getMaxCropRect(
             int inWidth, int inHeight, int outWidth, int outHeight, boolean leftAligned) {
         RectF cropRect = new RectF();
@@ -126,4 +126,35 @@ public class Utils {
         }
         return cropRect;
     }
+*/
+
+// add by wangjun---__SINGEL_PAGE_WP__--- begin
+    public static RectF getMaxCropRect(
+            int inWidth, int inHeight, int outWidth, int outHeight, boolean leftAligned) {
+        RectF cropRect = new RectF();
+        // Get a crop rect that will fit this
+        //add by zhaopenglin for single wallpaper 20161024 start
+        if (inWidth / (float) inHeight < outWidth / 2 / (float) outHeight) {
+            cropRect.left = 0;
+            cropRect.right = inWidth;
+            cropRect.top = (inHeight - (outHeight*2 / (float)outWidth )*inWidth)/2;
+            cropRect.bottom = inHeight - cropRect.top;
+        }else if (inWidth / (float) inHeight > outWidth / (float) outHeight) {
+             cropRect.top = 0;
+             cropRect.bottom = inHeight;
+             cropRect.left = (inWidth - (outWidth / (float) outHeight) * inHeight) / 2;
+             cropRect.right = inWidth - cropRect.left;
+             if (leftAligned) {
+                 cropRect.right -= cropRect.left;
+                 cropRect.left = 0;
+             }
+        } else {
+            cropRect.left = 0;
+            cropRect.right = inWidth;
+            cropRect.top = 0;
+            cropRect.bottom = inHeight;
+        }
+        return cropRect;
+    }
+// add by wangjun------ end
 }

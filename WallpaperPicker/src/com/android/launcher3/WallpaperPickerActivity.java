@@ -263,6 +263,7 @@ public class WallpaperPickerActivity extends WallpaperCropActivity {
             mResId = resId;
             mThumb = thumb;
         }
+ 
         @Override
         public void onClick(final WallpaperPickerActivity a) {
             a.setWallpaperButtonEnabled(false);
@@ -277,6 +278,9 @@ public class WallpaperPickerActivity extends WallpaperCropActivity {
                     RectF crop = Utils.getMaxCropRect(
                             src.getImageWidth(), src.getImageHeight(),
                             wallpaperSize.x, wallpaperSize.y, false);
+			// add by wangjun----__SINGEL_PAGE_WP__-- begin
+                    wallpaperSize.x = (int)(crop.width()/crop.height() * wallpaperSize.y);
+			// add by wangjun------ end
                     return wallpaperSize.x / crop.width();
                 }
             }, new Runnable() {
